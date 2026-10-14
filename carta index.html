@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Novia Hermosa ❤️💙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #e3f2fd 50%, #f8bbd0 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: #4a2c2a;
+            min-height: 100vh;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+
+        /* Corazones Flotantes */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 8s infinite linear;
+            bottom: -20px;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #1565c0;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Contador */
+        .timer-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.15);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border: 2px solid #f48fb1;
+        }
+        .timer-card h2 {
+            font-size: 1.3rem;
+            color: #c2185b;
+            margin-bottom: 15px;
+        }
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .time-box {
+            background: #fff0f5;
+            padding: 12px 5px;
+            border-radius: 12px;
+            border: 1px solid #f48fb1;
+        }
+        .time-num {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #d81b60;
+        }
+        .time-label {
+            font-size: 0.75rem;
+            color: #ad1457;
+            text-transform: uppercase;
+        }
+
+        /* Carta de Amor Principal */
+        .envelope-section {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .envelope-box {
+            background: linear-gradient(135deg, #ff80ab, #ff4081);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+            transition: all 0.3s ease;
+            border: 3px dashed #fff;
+        }
+        .envelope-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.4);
+        }
+        .envelope-box h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        .envelope-box p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .letter-content {
+            display: none;
+            background: #fffdf9;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            margin-top: 20px;
+            border-left: 6px solid #e91e63;
+            border-right: 6px solid #2196f3;
+            text-align: left;
+            animation: fadeIn 0.6s ease-in-out;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #3e2723;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sección Interactiva: Mini Cartas de Razones */
+        .reasons-section {
+            max-width: 800px;
+            margin: 50px auto 20px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #1565c0;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* Efecto Flip 3D para Mini Cartas */
+        .mini-card {
+            background-color: transparent;
+            height: 160px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .mini-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        .mini-card.open .mini-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .mini-card-front, .mini-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        /* Frente de la mini carta (Cerrada) */
+        .mini-card-front {
+            background: linear-gradient(135deg, #ffffff, #ffe0b2);
+            border: 2px dashed #f48fb1;
+            color: #d81b60;
+        }
+        .mini-card-front .envelope-icon {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            transition: transform 0.3s;
+        }
+        .mini-card:hover .mini-card-front .envelope-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .mini-card-front span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #c2185b;
+        }
+
+        /* Reverso de la mini carta (Abierta con la Razón) */
+        .mini-card-back {
+            background: linear-gradient(135deg, #ffffff, #e3f2fd);
+            border: 2px solid #90caf9;
+            color: #3e2723;
+            transform: rotateY(180deg);
+            justify-content: center;
+            font-size: 0.92rem;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: #c2185b;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Corazones Flotantes Combinados -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <header>
+        <h1>Para el Amor de Mi Vida ❤️💙</h1>
+        <p class="subtitle">Cada segundo a tu lado es mi momento favorito</p>
+    </header>
+
+    <!-- Contador de Tiempo -->
+    <div class="timer-card">
+        <h2>Hemos estado juntos durante:</h2>
+        <div class="timer-grid">
+            <div class="time-box"><div class="time-num" id="days">0</div><div class="time-label">Días</div></div>
+            <div class="time-box"><div class="time-num" id="hours">0</div><div class="time-label">Horas</div></div>
+            <div class="time-box"><div class="time-num" id="minutes">0</div><div class="time-label">Mins</div></div>
+            <div class="time-box"><div class="time-num" id="seconds">0</div><div class="time-label">Segs</div></div>
+        </div>
+    </div>
+
+    <!-- Carta Principal -->
+    <div class="envelope-section">
+        <div class="envelope-box" onclick="toggleLetter()">
+            <h3>💌 Haz clic para abrir tu Carta de Amor 💌</h3>
+            <p>Un mensaje especial hecho con todo mi corazón</p>
+        </div>
+        
+        <div class="letter-content" id="letter">
+            <p>Buenos días, amor ❤️. A pesar de todas las dificultades, las circunstancias y los errores que hemos cometido, te doy las gracias por estar conmigo este año y espero que sea así hasta el día de la boda. ¡FELIZ ANIVERSARIO! A pesar de que sea atrasado por la situación que hemos afrontado, quiero decirte que, pase lo que pase, mi amor por ti siempre va a estar para ti. Siempre tendrás un lugar en un rincón muy especial de mi corazón y una gran parte de él en tus manos. Te amo tanto y gracias por hacerme el hombre más feliz 💙.</p>
+            <br>
+            <p>Siempre te amaré... y no lo digo por decir, lo digo porque a pesar de todo me hiciste convertirme en alguien que nunca llegué a imaginar. Me diste el apoyo, la confianza y la seguridad de que con amor todo es posible; con el suficiente amor se podrá cambiar hasta a la persona más seria, más cerrada, más rebelde y más pensante...</p>
+            <br>
+            <p style="text-align: center; font-size: 1.4rem; color: #d81b60; font-family: 'Caveat', cursive; margin: 15px 0;">❤️ 💙 ❤️ 💙 ❤️</p>
+            <br>
+            <p>Tu amor me gusta, quisiera que algún día despertemos y digamos: <i>¿qué hay para comer?</i>, y pensar y ver hasta dónde es posible llegar con el amor de unos adolescentes que siempre se amaron. TE AMO MUCHO MI NIÑA HERMOSA, MI DORMILONA PRECIOSA, MI FOKITA BONITA Y MI ESPOSA LINDA. TE AMO MUCHO ❤️💙</p>
+        </div>
+    </div>
+
+    <!-- Mini Cartas Interactivas de Razones -->
+    <div class="reasons-section">
+        <h2 class="section-title">Razones por las que te amo 💙❤️</h2>
+        <p class="section-subtitle">Haz clic en cada sobrecito para descubrir una razón 👇</p>
+        
+        <div class="cards-grid">
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #1</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Por la forma tan linda en la que me sonríes todos los días y alegras mi mundo ✨.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #2</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Porque me hiciste convertirme en alguien mucho mejor de lo que jamás imaginé ❤️.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #3</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Por tu apoyo incondicional, tu confianza y la hermosa seguridad que me das 💙.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #4</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Por tus abrazos tan cálidos que siempre son y serán mi lugar seguro 🥺.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #5</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Porque eres mi dormilona preciosa, mi fokita bonita y mi esposa linda 🥰.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini-card" onclick="this.classList.toggle('open')">
+                <div class="mini-card-inner">
+                    <div class="mini-card-front">
+                        <div class="envelope-icon">✉️</div>
+                        <span>Abrir Carta #6</span>
+                    </div>
+                    <div class="mini-card-back">
+                        <p>Porque sueño con despertar a tu lado y decirte: ¿qué hay para comer hoy, mi amor? 💭❤️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Hecho con todo mi amor para ti 💙❤️
+    </footer>
+
+    <script>
+        // Contador desde el 1 de octubre de 2025
+        const startDate = new Date('2025-10-01T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Carta principal
+        function toggleLetter() {
+            const letter = document.getElementById('letter');
+            if (letter.style.display === 'block') {
+                letter.style.display = 'none';
+            } else {
+                letter.style.display = 'block';
+                letter.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Corazones flotantes rojos y azules
+        const heartsContainer = document.getElementById('hearts');
+        const symbols = ['❤️', '💙', '💖', '💙'];
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 6 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 18 + 14) + 'px';
+            heartsContainer.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
